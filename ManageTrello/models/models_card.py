@@ -13,6 +13,7 @@ from ManageTrello.utils.utils_card import get_custom_field_value
 
 class CardTrello(models.Model):
     card_id = models.CharField(max_length=200, unique=True)
+    # card_name = models.CharField(max_length=200)
     nom_complet = models.CharField(max_length=200)
     telephone = models.CharField(max_length=200)
     addresse = models.CharField(max_length=200)
@@ -116,7 +117,6 @@ class CardTrello(models.Model):
         print('card.id : %s' % str(card.id))
         self.update_custom_fields_card(card)
         return card.id, card
-
 
     def get_custom_fields_card(self, card_id):
         base_url = "https://api.trello.com/1"

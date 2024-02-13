@@ -5,10 +5,12 @@ from trello import TrelloClient
 from ManageTrello.models.models_board import WorkSpaceTrello, TableTrello, ListTrello, CustomFieldTrello, LabelTrello, \
     CustomFieldOptionTrello
 
+
 # Assurez-vous que les variables d'environnement sont définies
 os.environ['TRELLO_API_KEY'] = '92692647ed258c3832f52e3f9f07d1c2'
 os.environ['TRELLO_API_SECRET'] = '98d6b3d552aba9eec00c9d986f81e18f9167e57132a698dafc6bc73fb9f86514'
 os.environ['TRELLO_TOKEN'] = 'ATTAf55bbe1ec116e09dca1629be00711a0d4229f284cc0dbf32dcbee29c89c07e30283BE08B'
+
 LISTES_TRELLO = [
     {"name": "Entrees", "role": "nouvelle_entree"},
     {"name": "SRDV pas encore saisie", "role": "en_attente_de_saisie"},
