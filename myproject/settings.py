@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ManageTrello'
+    'ManageTrello',
+    'ManageTrello.models',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

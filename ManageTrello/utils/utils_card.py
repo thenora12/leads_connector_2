@@ -1,3 +1,9 @@
+from trello import TrelloClient
+
+from ManageTrello.trello_client import get_table_id_from_name
+from ManageTrello.models.models_card import *
+
+
 def get_custom_field_value(custom_field_data, custom_field_id):
     # Récupérer la valeur du custom field
     custom_field_value = None
@@ -33,3 +39,6 @@ def get_custom_field_value(custom_field_data, custom_field_id):
                 custom_field_value = field_item['idValue']
 
     return custom_field_value
+
+
+

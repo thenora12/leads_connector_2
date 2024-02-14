@@ -1,13 +1,10 @@
-import requests
 from django.db import models
-
-from ManageTrello.trello_client import BOARD, TRELLO_LIST_ID_INPUT
+import requests
 from trello import CustomFieldNumber, CustomFieldText, CustomFieldDate, CustomFieldList
 
-from ManageTrello.trello_client import CUSTOM_FIELDS_IDS, DICT_SOURCE_FIELDS_SOURCE, \
-    DICT_SOURCE_FIELDS_STATUS
-
-from ManageTrello.trello_client import api_key, api_token
+from ManageTrello.models.models_board import ListTrello
+from ManageTrello.trello_client import BOARD, TRELLO_LIST_ID_INPUT, CUSTOM_FIELDS_IDS, DICT_SOURCE_FIELDS_SOURCE, \
+    DICT_SOURCE_FIELDS_STATUS, api_key, api_token
 from ManageTrello.utils.utils_card import get_custom_field_value
 
 
@@ -24,7 +21,7 @@ class CardTrello(models.Model):
     source = models.CharField(max_length=200)
     statut_commande = models.CharField(max_length=200)
     city_ramassage_sendit = models.CharField(max_length=200)
-
+    list = models.ForeignKey(ListTrello, on_delete=models.CASCADE)
     def create_description(self):
         print('we aree in desc')
         fields = [
@@ -164,6 +161,30 @@ class CardTrello(models.Model):
             "id_trello_order_status": id_trello_order_status,
             "city_sendit": city_sendit,
             "city_ramassage_sendit": city_ramassage_sendit,
+
         }
 
         return dict_order_values
+
+    @classmethod
+    def get_cards_data_by_list(cls, list):
+        cards = cls.objects.filter(list=list)
+        cards_data = []
+        for card in cards:
+            card_data = {
+                'card_id': card.card_id,
+                'nom_complet': card.nom_complet,
+                'telephone': card.telephone,
+                'addresse': card.addresse,
+                'prix': card.prix,
+                'quantite': card.quantite,
+                'date_reception': card.date_reception,
+                'produit': card.produit,
+                'numero_suivi': card.numero_suivi,
+                'source': card.source,
+                'statut_commande': card.statut_commande,
+                'city_ramassage_sendit': card.city_ramassage_sendit,
+                # Add other fields as needed
+            }
+            cards_data.append(card_data)
+        return cards_data
